@@ -45,7 +45,7 @@ window.setTimeout(3000)
 for (i=0; i < barbfarm.length; i++){
   try{
    socketService.emit(routeProvider.SEND_PRESET,  {start_village: 9993, target_village: barbfarm[i], army_preset_id: farmpresets[0], type: 'attack'}, function(data){
-   delete barbfarm[i];
+   barbfarm.splice(i, 1);
    })
   }
   catch(){
@@ -59,7 +59,7 @@ window.setTimeout(3000)
 for (i=0; i < barbfarm.length; i++){
   try{
    socketService.emit(routeProvider.SEND_PRESET,  {start_village: 9993, target_village: barbfarm[i], army_preset_id: farmpresets[1], type: 'attack'}, function(data){
-   delete barbfarm[i];
+   barbfarm.splice(i, 1);
    })
   }
   catch(){
@@ -71,7 +71,7 @@ for (i=0; i < barbfarm.length; i++){
 for (i=0; i < barbfarm.length; i++){
   try{
    socketService.emit(routeProvider.SEND_PRESET,  {start_village: 10805, target_village: barbfarm[i], army_preset_id: farmpresets[0], type: 'attack'}, function(data){
-   delete barbfarm[i];
+   barbfarm.splice(i, 1);
    })
   }
   catch(err){
@@ -85,7 +85,7 @@ window.setTimeout(3000)
 for (i=0; i < barbfarm.length; i++){
   try{
    socketService.emit(routeProvider.SEND_PRESET,  {start_village: 10805, target_village: barbfarm[i], army_preset_id: farmpresets[1], type: 'attack'}, function(data){
-   delete barbfarm[i];
+   barbfarm.splice(i, 1);
    })
   }
   catch(err){
