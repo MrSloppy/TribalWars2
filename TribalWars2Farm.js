@@ -50,7 +50,7 @@ function stuurFarmLijst(){
 	   barbfarm.splice(i, 1);
 	   })
 	  }
-	  catch(){
+	  catch(err){
 			console.log("Geen troepen meer!!!")
 	    break
 	  }
@@ -62,7 +62,7 @@ function stuurFarmLijst(){
 	   barbfarm.splice(i, 1);
 	   })
 	  }
-	  catch(){
+	  catch(err){
 			console.log("Geen troepen meer!!!")
 	    break
 	  }
