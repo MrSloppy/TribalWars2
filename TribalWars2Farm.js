@@ -6,11 +6,45 @@
 // @grant       none
 // ==/UserScript==
 
+
+// Dit script gaat van enkele dingen uit
+// Je kan zelf bepalen hoe groot je de farms wilt hebben. Er is echter 1 voorwoorde
+// Bij de naamgeving van de farm presets !!!MOET!!! er met kleine letters het woord 'farm' in zitten
+// Zonder aanhalingstekens.
+// Ik zelf heb het alsvolgt:
+// spear farm = 40 spear.
+// sword farm = 40 sword.
+// bijl farm = 40 bijl.
+// lc farm = 30 lc
+
+
+// Deze 2 vars zijn om alles wat netter te houden:
 window.socketService = window.injector.get('socketService');
 window.routeProvider = window.injector.get('routeProvider');
-// Dit zijn vars die we later nog gaan gebruiken
+
+// Dit zijn lege arrays die we later nog gaan gebruiken in functies en gevuld gaan worden met bruikbare waarden.
 var barbfarm = []
 var farmpresets = []
+var village_lijst = []
+
+
+// Dit is de function die de dorpen van de huidige speler in 1 lijst stopt voor verder gebruik
+function maakVillage_lijst(){
+	socketService.emit(routeProvider.CHAR_GET_INFO, {}, function(data){
+		for(i=0; i < data.villages.length; i++){
+				console.log(data.villages[i].name)
+				console.log(data.villages[i].villageId)
+				//village_lijst is de array met alle ID's van de dorpen
+				village_lijst.push(data.villages[i].villageId)
+		}
+	});
+	setTimeout(maakPresetLijst, 2000)
+}
+
+
+
+
+
 
 // Dit is de funcite om de farm presets op te slaan voor later gebruik
 function maakPresetLijst(){
@@ -117,4 +151,4 @@ function stuurFarmLijst(){
 	};
 }
 
-maakPresetLijst()
+maakVillage_lijst()
