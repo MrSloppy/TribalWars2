@@ -91,4 +91,30 @@ function stuurFarmLijst(){
 	    break
 	  }
 	};
+
+	for (i=0; i < barbfarm.length; i++){
+		try{
+		 socketService.emit(routeProvider.SEND_PRESET,  {start_village: 10805, target_village: barbfarm[i], army_preset_id: farmpresets[2], type: 'attack'}, function(data){
+		 barbfarm.splice(i, 1);
+		 })
+		}
+		catch(err){
+			console.log("Geen troepen meer!!!")
+			break
+		}
+	};
+
+	for (i=0; i < barbfarm.length; i++){
+		try{
+		 socketService.emit(routeProvider.SEND_PRESET,  {start_village: 9993, target_village: barbfarm[i], army_preset_id: farmpresets[2], type: 'attack'}, function(data){
+		 barbfarm.splice(i, 1);
+		 })
+		}
+		catch(err){
+			console.log("Geen troepen meer!!!")
+			break
+		}
+	};
 }
+
+maakPresetLijst()
