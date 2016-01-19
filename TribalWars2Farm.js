@@ -78,77 +78,25 @@ function maakFarmLijst(){
 
 //Dit wordt de loop die de farms vervolgens verstuurt.
 function stuurFarmLijst(){
-	for (i=0; i < barbfarm.length; i++){
-	  try{
-	   socketService.emit(routeProvider.SEND_PRESET,  {start_village: 9993, target_village: barbfarm[i], army_preset_id: farmpresets[0], type: 'attack'}, function(data){
-	   barbfarm.splice(i, 1);
-	   })
-	  }
-	  catch(err){
-			console.log("Geen troepen meer!!!")
-	    break
-	  }
-	};
+	for (i=0; i < village_lijst.length; i++){
 
-	for (i=0; i < barbfarm.length; i++){
-	  try{
-	   socketService.emit(routeProvider.SEND_PRESET,  {start_village: 9993, target_village: barbfarm[i], army_preset_id: farmpresets[1], type: 'attack'}, function(data){
-	   barbfarm.splice(i, 1);
-	   })
-	  }
-	  catch(err){
-			console.log("Geen troepen meer!!!")
-	    break
-	  }
-	};
 
-	for (i=0; i < barbfarm.length; i++){
-	  try{
-	   socketService.emit(routeProvider.SEND_PRESET,  {start_village: 10805, target_village: barbfarm[i], army_preset_id: farmpresets[0], type: 'attack'}, function(data){
-	   barbfarm.splice(i, 1);
-	   })
-	  }
-	  catch(err){
-			console.log("Geen troepen meer!!!")
-	    break
-	  }
-	};
+		for (j=0; j < farmpresets.length; j++){
 
-	for (i=0; i < barbfarm.length; i++){
-	  try{
-	   socketService.emit(routeProvider.SEND_PRESET,  {start_village: 10805, target_village: barbfarm[i], army_preset_id: farmpresets[1], type: 'attack'}, function(data){
-	   barbfarm.splice(i, 1);
-	   })
-	  }
-	  catch(err){
-			console.log("Geen troepen meer!!!")
-	    break
-	  }
-	};
+			for (h=0; h < barbfarm.length; h++){
 
-	for (i=0; i < barbfarm.length; i++){
-		try{
-		 socketService.emit(routeProvider.SEND_PRESET,  {start_village: 10805, target_village: barbfarm[i], army_preset_id: farmpresets[2], type: 'attack'}, function(data){
-		 barbfarm.splice(i, 1);
-		 })
-		}
-		catch(err){
-			console.log("Geen troepen meer!!!")
-			break
-		}
-	};
-
-	for (i=0; i < barbfarm.length; i++){
-		try{
-		 socketService.emit(routeProvider.SEND_PRESET,  {start_village: 9993, target_village: barbfarm[i], army_preset_id: farmpresets[2], type: 'attack'}, function(data){
-		 barbfarm.splice(i, 1);
-		 })
-		}
-		catch(err){
-			console.log("Geen troepen meer!!!")
-			break
-		}
-	};
+			  try{
+			   socketService.emit(routeProvider.SEND_PRESET,  {start_village: village_lijst[i], target_village: barbfarm[h], army_preset_id: farmpresets[j], type: 'attack'}, function(data){
+			   barbfarm.splice(i, 1);
+			   })
+			  }
+			  catch(err){
+					console.log("Geen troepen meer!!!")
+			    break
+			  }
+			}
+		};
+	}
 }
 
 maakVillage_lijst()
