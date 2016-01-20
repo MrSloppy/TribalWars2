@@ -7,9 +7,9 @@ window.routeProvider = window.injector.get('routeProvider');
 
 // Ook maken we alvast weer wat variabelen aan zodat we die later kunnen gebruiken
 var village_lijst = []
-var building_lijst = ["headquarter", "barracks", "tavern", "hospital", "preceptory",
-                  "church", "chapel", "academy", "rally_point", "statue", "clay_pit"
-                  , "farm", "iron_mine", "market", "timber_camp", "wall", "warehouse"]
+var building_lijst = ["academy", "timber_camp", "clay_pit", "iron_mine", "headquarter", "barracks",
+                  "warehouse", "farm", "tavern", "hospital", "preceptory",
+                  "church", "chapel", "rally_point", "statue", "market", "wall"]
 
 
 // Deze functie is ongeveer hetzelfde als van de Farm functie en maakt een lijst met alle dorpen
@@ -37,7 +37,45 @@ function getBuilding_Levels(){
         }
       });
   }
+  setTimeout(buildBuildings, 2000)
 }
+
+function buildBuildings(){
+  for(i=0; i < village_lijst.length; i++){
+
+    socketService.emit(routeProvider.VILLAGE_GET_VILLAGE ,{village_id: village_lijst[i]}, function(data){
+      console.log(data.resources)
+      for(j=0; j < village_lijst.length; j++){
+        if(data.resources.food < 50){
+          console.log(village_lijst)
+          socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING ,{village_id: village_lijst[j], building: "farm", premium: 0}, function(data){
+            console.log(data)
+          });
+        }
+        else if(data.resources.clay > data.resources.wood){
+          console.log(village_lijst)
+          socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING ,{village_id: village_lijst[j], building: "timber_camp", premium: 0}, function(data){
+            console.log(data)
+          });
+        }
+        else if(data.resources.clay < data.resources.iron){
+          console.log(village_lijst)
+          socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING ,{village_id: village_lijst[j], building: "iron_mine", premium: 0}, function(data){
+            console.log(data)
+          });
+        }
+        else {
+          console.log(village_lijst)
+          socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING ,{village_id: village_lijst[j], building: "iron_mine", premium: 0}, function(data){
+            console.log(data)
+          });
+        }
+      }
+    });
+  }
+  setTimeout(buildBuildings, 10000)
+}
+
 
 
 // Hiermee wordt alles aangeroepen en gaat het feest van start
