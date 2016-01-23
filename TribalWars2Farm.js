@@ -64,7 +64,7 @@ function maakPresetLijst(){
 // Sword farm preset id: 1367804
 // Met deze krijg je alle info over omliggende barbaren dorpen en worden hun IDs opgeslagen in de array barbfarm
 function maakFarmLijst(){
-	socketService.emit(routeProvider.MAP_GETVILLAGES, {x:411, y:543, width:25, height:25}, function(data){
+	socketService.emit(routeProvider.MAP_GETVILLAGES, {x:411, y:553, width:25, height:25}, function(data){
 		for (i=0; i < data.villages.length; i++){
 			if (data.villages[i].character_name == null){
 				console.log(data.villages[i])
