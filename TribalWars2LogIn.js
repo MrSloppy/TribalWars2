@@ -17,15 +17,35 @@ window.routeProvider = window.injector.get('routeProvider');
 var barbfarm = []
 var farmpresets = []
 var village_lijst = []
+var wereld_ID = []
+var speler_id = []
 
 // Dit is de functie om in te loggen
 function auto_login(){
 
   username = prompt("Please put in your username")
   password = prompt("Please type your password")
+  world = prompt("Which world do you want to log in too? (caps sensitive!)")
 
   socketService.emit(routeProvider.LOGIN, {name: username, pass: password}, function(data){
     console.log(data)
+    var speler_id = data.player_id
   });
+
+  socketService.emit(routeProvider.WORLD_GET_FOR_PLAYER, {}, function(data){
+    for(i=0; i < data.characters.length; i++){
+      if (world == data.characters[i].world_name){
+        console.log(data.characters[i].world_name)
+        console.log(data.characters[i].world_id)
+        var wereld_ID = data.characters[i].world_id
+      }
+    }
+
+    });
+
+  socketService.emit(routeProvider.SELECT_CHARACTER, {id: "174017", world_id: "nl8", ref_param: 0}, function(data){
+    console.log(data)
+  });
+
 
 }
