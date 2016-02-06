@@ -26,7 +26,8 @@ window.routeProvider = window.injector.get('routeProvider');
 var barbfarm = []
 var farmpresets = []
 var village_lijst = []
-
+var village_loc_x = []
+var village_loc_y = []
 
 // Dit is de function die de dorpen van de huidige speler in 1 lijst stopt voor verder gebruik
 function maakVillage_lijst(){
@@ -36,6 +37,8 @@ function maakVillage_lijst(){
 				console.log(data.villages[i].villageId)
 				//village_lijst is de array met alle ID's van de dorpen
 				village_lijst.push(data.villages[i].villageId)
+				village_loc_x.push(data.villages[i].x)
+				village_loc_y.push(data.villages[i].y)
 		}
 	});
 	setTimeout(maakPresetLijst, 2000)
@@ -64,14 +67,17 @@ function maakPresetLijst(){
 // Sword farm preset id: 1367804
 // Met deze krijg je alle info over omliggende barbaren dorpen en worden hun IDs opgeslagen in de array barbfarm
 function maakFarmLijst(){
-	socketService.emit(routeProvider.MAP_GETVILLAGES, {x:411, y:553, width:25, height:25}, function(data){
-		for (i=0; i < data.villages.length; i++){
-			if (data.villages[i].character_name == null){
-				console.log(data.villages[i])
-				barbfarm.push(data.villages[i].id)
+	for (i=0; i < village_lijst.length; i++){
+
+		socketService.emit(routeProvider.MAP_GETVILLAGES, {x:(village_loc_x[i]-10), y:(village_loc_y[i]-10), width:20, height:20}, function(data){
+			for (j = 0; j < data.villages.length; j++){
+				if (data.villages[j].character_name == null){
+						console.log(data.villages[j])
+						barbfarm.push(data.villages[j].id)
+				}
 			}
-		}
-	});
+		});
+	}
 	setTimeout(stuurFarmLijst, 4000)
 }
 
