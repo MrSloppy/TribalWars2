@@ -17,8 +17,8 @@ window.routeProvider = window.injector.get('routeProvider');
 var barbfarm = []
 var farmpresets = []
 var village_lijst = []
-var wereld_ID = []
-var speler_id = []
+var wereld_ID = 0
+var speler_id = 0
 
 // Dit is de functie om in te loggen
 function auto_login(){
@@ -43,7 +43,7 @@ function auto_login(){
 
     });
 
-  socketService.emit(routeProvider.SELECT_CHARACTER, {id: "174017", world_id: "nl8", ref_param: 0}, function(data){
+  socketService.emit(routeProvider.SELECT_CHARACTER, {id: speler_id, world_id: wereld_ID, ref_param: 0}, function(data){
     console.log(data)
   });
 
