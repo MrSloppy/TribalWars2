@@ -5,7 +5,7 @@ var village_lijst = []
 var boog = 0
 var bijl = 0
 var catapult = 0
-var doppelsoldner = 0
+var bersekers = 0
 var hc = 0
 var paladin = 0
 var lc = 0
@@ -24,8 +24,7 @@ function maakVillage_lijst(){
 				console.log(data.villages[i].villageId)
 				//village_lijst is de array met alle ID's van de dorpen
 				village_lijst.push(data.villages[i].villageId)
-				village_loc_x.push(data.villages[i].x)
-				village_loc_y.push(data.villages[i].y)
+
 		}
 	});
   setTimeout(tel_troepen, 4000)
@@ -39,7 +38,7 @@ function tel_troepen(){
       bijl += data.available_units.axe.total
       boog += data.available_units.archer.total
       catapult += data.available_units.catapult.total
-      doppelsoldner += data.available_units.doppelsoldner.total
+      bersekers += data.available_units.doppelsoldner.total
       hc += data.available_units.heavy_cavalry.total
       paladin += data.available_units.knight.total
       lc += data.available_units.light_cavalry.total
@@ -62,9 +61,9 @@ function show_troepen(){
   console.log("Toaal def: ")
   console.log("Speer: "+speer+", zwaard: "+zwaard+", boog: "+boog+", hc: "+hc+", trebuchet: "+trebuchet)
   console.log("Totaal off: ")
-  console.log("Bijl: "+bijl+", lc: "+lc+", bredeboog: "+bredeboog+", ram: "+ram+", catapult: "+catapult)
+  console.log("Bijl: "+bijl+", lc: "+lc+", bredeboog: "+bredeboog+", ram: "+ram+", catapult: "+catapult+", bersekers: "+bersekers)
   console.log("Overig:")
-  console.log("Paladin: "+paladin+", edel: "+edel+", doppelsoldner: "+doppelsoldner)
+  console.log("Paladin: "+paladin+", edel: "+edel)
 }
 
 maakVillage_lijst()
