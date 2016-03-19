@@ -1,0 +1,34 @@
+// In dit script gaat een poging worden gedaan tot het automatiseren van
+// de bouw van dorpen.
+
+// Net zoals bij het Farm script doen we eerste de volgende regels:
+window.socketService = window.injector.get('socketService');
+window.routeProvider = window.injector.get('routeProvider');
+
+// Ook maken we alvast weer wat variabelen aan zodat we die later kunnen gebruiken
+var village_lijst = [];
+var building_lijst = ["academy", "timber_camp", "clay_pit", "iron_mine", "headquarter", "barracks",
+                  "warehouse", "farm", "tavern", "hospital", "preceptory",
+                  "church", "chapel", "rally_point", "statue", "market", "wall"];
+
+BuildWalls(){
+
+	socketService.emit(routeProvider.CHAR_GET_INFO, {}, function(data){
+			for(i=0; i < data.villages.length; i++){
+					console.log(data.villages[i].name);
+					console.log(data.villages[i].villageId);
+					//village_lijst is de array met alle ID's van de dorpen
+					village_lijst.push(data.villages[i].villageId);
+			}
+	});
+
+
+	for(i=0; i < village_lijst.length; i++){
+
+		socketService.emit(routeProvider.VILLAGE_UPGRADE_BUILDING , {village_id: village_lijst[i], building: "wall", premium: 0}, function(data){
+        		console.log(data)
+        	});
+	}
+
+};
+BuildWalls();
